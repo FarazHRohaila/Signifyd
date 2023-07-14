@@ -23,7 +23,6 @@ define('Signifyd_Meta', 'signify_meta');
 require_once(plugin_dir_path(__FILE__) . 'includes/class-signify-essentials.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/class-signify-settings.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/class-signify-init.php');
-//require_once(plugin_dir_path(__FILE__) . 'includes/class-signify-records.php');
 require_once(plugin_dir_path(__FILE__) . 'includes/class-signify-status-box.php');
 
 
