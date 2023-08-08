@@ -60,25 +60,3 @@ function admin_menu() {
 }
 
 add_action('admin_menu', 'admin_menu');
-if ( ! function_exists( 'plugin_log' ) ) {
-  function plugin_log( $entry, $mode = 'a', $file = 'transactions_' ) { 
-    // Get WordPress uploads directory.
-    $upload_dir = wp_upload_dir();
-    $upload_dir = $upload_dir['basedir'];
-	$upload_dir = $upload_dir. "/signifylogs/";
-	if ( !file_exists( $upload_dir ) && !is_dir( $upload_dir ) ) {
-		mkdir( $upload_dir );       
-	} 
-    // If the entry is array, json_encode.
-    if ( is_array( $entry ) ) { 
-      $entry = json_encode( $entry ); 
-    } 
-	$file = $file.date("d-m-y").".log";
-    // Write the log file.
-    $file  = $upload_dir . $file;
-    $file  = fopen( $file, $mode );
-    $bytes = fwrite( $file, current_time( 'mysql' ) . "::" . $entry . "\n" ); 
-    fclose( $file ); 
-    return $bytes;
-  }
-}

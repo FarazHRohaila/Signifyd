@@ -10,6 +10,7 @@ class SignifyInit {
 	
 	public function __construct() {
         add_action('woocommerce_thankyou', array($this, 'checkpayment'), 10, 1); 
+        $logger = new Logger();
 	}
 
     // Declare function to check payment method when "woocommerce_thankyou" action is triggered
@@ -140,6 +141,7 @@ class SignifyInit {
                     $order->update_status('completed');
                     $obj->insert_data($order_id, 'completed',$signifyResponseValue['decision']['checkpointActionReason'], $signifyResponse);
                     plugin_log("Status Completed for ".$order_id."<br>");
+
                 }
                 else if($signifyResponseValue['decision']['checkpointActionReason']=="SIGNIFYD_DECLINED"){
                     $order->update_status('cancelled');
@@ -153,7 +155,7 @@ class SignifyInit {
 
                    }
                 }
-
+                $logger->saveLogsToFile($order_id);
             }
                 
         } 
